@@ -1,6 +1,10 @@
 import React from "react";
 import "./Header.css";
+import { useDispatch } from "react-redux";
+import { dummyData } from "../../Redux/Actions/DataActions";
 const Header = () => {
+  const dispatch = useDispatch();
+
   return (
     <div className="header-container">
       <div className="header-location-search-container">
@@ -34,12 +38,12 @@ const Header = () => {
           </span>
         </div>
       </div>
-      <div className="dashboard-img">
-        <button type="button" class="btn btn-lg btn-primary">
-          Login
-          <span style={{marginLeft:"20px"}}>
-            <i className="fi fi-rr-user"></i>
-          </span>
+      <div className="dummy-button" style={{ marginTop: "20px" }}>
+        <button
+          className="btn btn-primary"
+          onClick={() => dispatch(dummyData())}
+        >
+          Dummy Button
         </button>
       </div>
     </div>

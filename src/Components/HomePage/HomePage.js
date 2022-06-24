@@ -3,11 +3,10 @@ import "./HomePage.css";
 import Header from "../Header/Header";
 import CategoryBar from "../CategoryBar/CategoryBar";
 import HomePagedata from "./HomePagedata/HomePagedata";
-import { useSelector } from "react-redux";
+
 
 const HomePage = () => {
-  let category_Data = useSelector((state) => state.allData.data);
-  let count=category_Data.length;
+  
   return (
     <div className="homepage-container">
       <Header />
@@ -18,7 +17,7 @@ const HomePage = () => {
         Top Stories for you
       </div>
       <div className="Category-bar">
-        <CategoryBar count={count} />
+        <CategoryBar />
       </div>
       <div className="homepage-area">
         <HomePagedata />

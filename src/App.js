@@ -10,7 +10,7 @@ import Categories from "./Components/Categories/Categories";
 
 function App() {
   const dispatch = useDispatch();
-  let category = "All category";
+
   const fetchData = async () => {
     try {
       const response = await fetch(
@@ -28,7 +28,7 @@ function App() {
           source: article.source.name,
         };
       });
-      dispatch(DataLoading(articles, category));
+      dispatch(DataLoading(articles));
     } catch (err) {
       console.log(err);
     }
@@ -39,60 +39,14 @@ function App() {
   }, []);
   return (
     <div className="App">
+      <SideBar />
       <Routes>
-        <Route
-          path="/"
-          exact
-          element={
-            <>
-              <SideBar /> <HomePage />
-            </>
-          }
-        />
-        <Route
-          path="/business"
-          element={
-            <>
-              {" "}
-              <SideBar /> <Categories />
-            </>
-          }
-        />
-        <Route
-          path="/Health"
-          element={
-            <>
-              {" "}
-              <SideBar /> <Categories />
-            </>
-          }
-        />
-        <Route
-          path="/Health"
-          element={
-            <>
-              {" "}
-              <SideBar /> <Categories />
-            </>
-          }
-        />
-        <Route
-          path="/Science"
-          element={
-            <>
-              {" "}
-              <SideBar /> <Categories />
-            </>
-          }
-        />
-        <Route
-          path="/Technology"
-          element={
-            <>
-              <SideBar /> <Categories />
-            </>
-          }
-        />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/business" element={<Categories />} />
+        <Route path="/Health" element={<Categories />} />
+        <Route path="/Health" element={<Categories />} />
+        <Route path="/Science" element={<Categories />} />
+        <Route path="/Technology" element={<Categories />} />
       </Routes>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./CategoryBar.css";
+import { useNavigate } from "react-router-dom";
 
 const keywords = [
   {
@@ -27,11 +28,12 @@ const keywords = [
 //how to install the react-router dom
 //
 
-const CategoryBar = ({ count }) => {
+const CategoryBar = () => {
   const [activeElement, setActiveElement] = useState();
+  const navigate = useNavigate();
 
   const handleClick = (value) => {
-    window.location.pathname = value.path;
+    navigate(value.path);
     setActiveElement(value.title);
     console.log(value.title);
   };
@@ -50,7 +52,7 @@ const CategoryBar = ({ count }) => {
               style={{ boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" }}
             >
               {value.title}
-              <span
+              {/* <span
                 className="badge badge-light"
                 style={{
                   position: "relative",
@@ -60,8 +62,8 @@ const CategoryBar = ({ count }) => {
                   borderRadius: "50%",
                 }}
               >
-                {count}
-              </span>
+                {length}
+              </span> */}
             </span>
           </div>
         ))}

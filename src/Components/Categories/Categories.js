@@ -5,6 +5,7 @@ import CategoryBar from "../CategoryBar/CategoryBar";
 import { createBrowserHistory } from "history";
 import { categoryData } from "../../Redux/Actions/DataActions";
 import { useSelector, useDispatch } from "react-redux";
+
 const Categories = () => {
   //get an id using params
   const history = createBrowserHistory();
@@ -20,29 +21,29 @@ const Categories = () => {
         );
         const data = await response.json();
         let articles = data.articles;
-        articles = articles.map((article) => {
-          return {
-            title: article.title,
-            description: article.description,
-            url: article.url,
-            urlToImage: article.urlToImage,
-            publishedAt: article.publishedAt,
-            source: article.source.name,
-          };
-        });
+        articles = articles
+          .filter((article) => article.description.length !== 0)
+          .map((article) => {
+            return {
+              title: article.title,
+              description: article.description,
+              url: article.url,
+              urlToImage: article.urlToImage,
+              publishedAt: article.publishedAt,
+              source: article.source.name,
+            };
+          });
+
         dispatch(categoryData(articles, id));
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-    return () => {
-      fetchData();
-    };
   }, [id]);
 
   let category_Data = useSelector((state) => state.allData.data);
-  let count=category_Data.length;
+
   Object.keys(category_Data).forEach((key) => {
     if (categoryData[key] === null) {
       delete categoryData[key];
@@ -53,9 +54,11 @@ const Categories = () => {
     <div className="homepage-container">
       <Header />
       <div className="homepage-content">Top Stories for you</div>
+      <div className="sort-container"></div>
       <div className="Category-bar">
-        <CategoryBar count={count} />
+        <CategoryBar length={category_Data.length} />
       </div>
+
       <div
         className="card-area"
         style={{ marginTop: "30px", marginLeft: "20px" }}
@@ -72,9 +75,14 @@ const Categories = () => {
               <div className="row g-0">
                 <div className="col-md-8">
                   <div className="card-body">
-                    <h5 className="card-title" style={{ fontWeight: "bolder" }}>
-                      {data.title}
-                    </h5>
+                    <a href={data.url}>
+                      <h5
+                        className="card-title"
+                        style={{ fontWeight: "bolder" }}
+                      >
+                        {data.title}
+                      </h5>
+                    </a>
                     <p className="card-text" style={{ marginTop: "20px" }}>
                       {data.description}
                     </p>

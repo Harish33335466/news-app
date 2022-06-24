@@ -22,9 +22,12 @@ const HomePagedata = () => {
         <div className="row g-0">
           <div className="col-md-8">
             <div className="card-body">
-              <h5 className="card-title" style={{ fontWeight: "bolder" }}>
-                {slicedData.map((data) => data.title)}
-              </h5>
+              <a href={slicedData.map((data) => data.url)}>
+                <h5 className="card-title" style={{ fontWeight: "bolder" }}>
+                  {slicedData.map((data) => data.title)}
+                </h5>
+              </a>
+
               <p className="card-text" style={{ marginTop: "20px" }}>
                 {slicedData.map((data) => data.description)}
               </p>
@@ -53,17 +56,19 @@ const HomePagedata = () => {
               style={{
                 boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
                 width: "800px",
-                display:"flex"
+                display: "flex",
               }}
             >
               <img
                 src={data.urlToImage ? data.urlToImage : imagesrc}
                 className="card-img-top"
                 alt="..."
-                style={{ height: "325px"}}
+                style={{ height: "325px" }}
               />
               <div className="card-body">
-                <h5 className="card-title">{data.title}</h5>
+                <a href={data.url}>
+                  <h5 className="card-title">{data.title}</h5>
+                </a>
                 <p className="card-text">
                   {data.description
                     ? data.description

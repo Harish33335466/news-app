@@ -2,10 +2,12 @@ import React from "react";
 import "./SideBar.css";
 import { SideBarData } from "./SideBarData";
 import Logo from "../../Assets/Logo.png";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
+  const navigate = useNavigate();
   function linkhandler(val) {
-    window.location.pathname = val.path;
+    navigate(val.path);
   }
   return (
     <div className="sidebar-container">
